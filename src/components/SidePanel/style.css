@@ -1,0 +1,8 @@
+.ant-drawer-close {
+  position: absolute;
+  left: -30px;
+  top: 10px;
+}
+:where(.css-dev-only-do-not-override-qgg3xn).ant-drawer .ant-drawer-header {
+  padding: 0;
+}
