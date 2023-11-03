@@ -1,6 +1,12 @@
-import { Drawer, Steps } from "antd";
+import { Drawer, Steps, Button} from "antd";
+import {ArrowRightOutlined} from '@ant-design/icons'
 import React, { useState } from "react";
 import "./style.css";
+import FirstPage from "../../pages/firstPage";
+import SecondPage from "../../pages/secondPage";
+import ThirdPage from "../../pages/thirdPage";
+import FourthPage from "../../pages/fourthPage";
+
 
 const SidePanel: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -10,38 +16,57 @@ const SidePanel: React.FC = () => {
     setOpen(false);
   };
 
-  const onChange = (value: number) => {
-    console.log("onChange:", value);
-    setCurrent(value);
-  };
-  const description = "This is a description.";
   const drawerWidth = 900;
+
+  const showStep = (step: number) => {
+    switch (step) {
+      case 0:
+        return <FirstPage />;
+      case 1:
+        return <SecondPage />;
+      case 2:
+        return <ThirdPage />;
+      case 3:
+        return <FourthPage />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div>
-      <Drawer placement="right" width={drawerWidth}  onClose={onClose} open={open}>
+    <div className="main-content">
+      <Drawer
+        placement="right"
+        width={drawerWidth}
+        onClose={onClose}
+        open={open}
+        className="drawer"
+      >
         <Steps
           current={current}
-          onChange={onChange}
+          onChange={setCurrent}
           items={[
             {
-              title: "Step 1",
-              description,
+              title: "ƏSAS MƏLUMATLAR",
             },
             {
-              title: "Step 2",
-              description,
+              title: "ƏMR MƏLUMATLARI",
             },
             {
-              title: "Step 3",
-              description,
+              title: "ELEKTRON FORMA",
             },
             {
-              title: "Step 3",
-              description,
+              title: "PAYLANACAQLAR SİYAHISI",
             },
-            
           ]}
         />
+        <h1>Əsas fəaliyyət üzrə Əmrlər</h1>
+
+        {showStep(current)}
+        <div className="btns">
+        <Button type="primary" >İmtina et</Button>
+        <Button type="primary" style={{background:"#008000", color:'#fff'}}>Davam et <ArrowRightOutlined /></Button>
+        </div>
       </Drawer>
     </div>
   );
