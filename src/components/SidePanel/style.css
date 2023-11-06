@@ -39,3 +39,7 @@
 :where(.css-dev-only-do-not-override-qgg3xn).ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover{
     background-color: #008000;
 }
+       
+:where(.css-dev-only-do-not-override-qgg3xn).ant-drawer .ant-drawer-body{
+    background-color: #fdfafa;
+}

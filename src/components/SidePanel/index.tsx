@@ -1,12 +1,11 @@
-import { Drawer, Steps, Button} from "antd";
-import {ArrowRightOutlined} from '@ant-design/icons'
+import { Drawer, Steps, Button } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import "./style.css";
 import FirstPage from "../../pages/firstPage";
 import SecondPage from "../../pages/secondPage";
 import ThirdPage from "../../pages/thirdPage";
 import FourthPage from "../../pages/fourthPage";
-
 
 const SidePanel: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -64,8 +63,14 @@ const SidePanel: React.FC = () => {
 
         {showStep(current)}
         <div className="btns">
-        <Button type="primary" >İmtina et</Button>
-        <Button type="primary" style={{background:"#008000", color:'#fff'}}>Davam et <ArrowRightOutlined /></Button>
+          <Button type="primary">İmtina et</Button>
+          <Button
+            type="primary"
+            style={{ background: "#008000", color: "#fff" }}
+            onClick={() => setCurrent(current + 1)}
+          >
+            Davam et <ArrowRightOutlined />
+          </Button>
         </div>
       </Drawer>
     </div>
