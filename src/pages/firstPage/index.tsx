@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button } from "antd";
+import { Button, Form } from "antd";
 import { CaretDownOutlined } from "@ant-design/icons";
 import {
   FirstStepIds,
@@ -15,6 +15,7 @@ import { mainDataSchema } from "../../validation";
 
 const FirstPage = () => {
   const {
+    handleSubmit,
     trigger,
     control,
     getValues,
@@ -23,6 +24,7 @@ const FirstPage = () => {
   } = useForm({
     resolver: yupResolver(mainDataSchema),
   });
+
   const onSubmit = (data: any) => console.log(data);
   const test = () => {
     console.log("salam");
@@ -34,20 +36,26 @@ const FirstPage = () => {
 
   return (
     <div className="firstPage-container">
-      <div className="firstPage-row">
-        <h2>Əsas məlumatlar</h2>
-        <form>
+      <Form onFinish={handleSubmit(onSubmit)}>
+        <div className="firstPage-row">
+          <h2>Əsas məlumatlar</h2>
           <ControllerA
+            name={appointmentData.id}
+            label={appointmentData.title}
             control={control}
             item={appointmentData}
             icon={<CaretDownOutlined />}
           />
           <ControllerA
+            name={classificationData.id}
+            label={classificationData.title}
             control={control}
             item={classificationData}
             icon={<CaretDownOutlined />}
           />
           <ControllerA
+            name={nomenclatureData.id}
+            label={nomenclatureData.title}
             control={control}
             item={nomenclatureData}
             value={nomenclatureData?.options.filter(
@@ -57,22 +65,26 @@ const FirstPage = () => {
             icon={<CaretDownOutlined />}
           />
           <ControllerA
+            name={contentData.id}
+            label={contentData.title}
             control={control}
             item={contentData}
             icon={<CaretDownOutlined />}
           />
-        </form>
-      </div>
-      <div className="firstPage-row">
-        <h2>Cavablandırılan sənəd</h2>
-        <Button type="primary">İmtina et</Button>
-      </div>
-      <div className="firstPage-row">
-        <h2> Əlaqəli sənəd</h2>
-        <Button type="primary" onClick={test}>
-          İmtina et
-        </Button>
-      </div>
+        </div>
+        <Form.Item>
+          <div className="firstPage-row">
+            <h2>Cavablandırılan sənəd</h2>
+            <Button type="primary">İmtina et</Button>
+          </div>
+          <div className="firstPage-row">
+            <h2>Əlaqəli sənəd</h2>
+            <Button type="primary" htmlType="submit">
+              İmtina et
+            </Button>
+          </div>
+        </Form.Item>
+      </Form>
     </div>
   );
 };

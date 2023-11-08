@@ -9,7 +9,8 @@ import "./style.css";
 
 const SidePanel: React.FC = () => {
   const [open, setOpen] = useState(true);
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(0);
+  console.log("current", current);
 
   const onClose = () => {
     setOpen(false);
@@ -19,13 +20,13 @@ const SidePanel: React.FC = () => {
 
   const showStep = (step: number) => {
     switch (step) {
-      case 1:
+      case 0:
         return <FirstPage />;
-      case 2:
+      case 1:
         return <SecondPage />;
-      case 3:
+      case 2:
         return <ThirdPage />;
-      case 4:
+      case 3:
         return <FourthPage />;
       default:
         return null;
