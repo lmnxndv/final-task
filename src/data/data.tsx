@@ -1,55 +1,54 @@
-interface IOptionsData {
-  sections: OptionsSection[];
-}
-interface OptionsSection {
-  id: number;
+export interface OptionsSection {
+  id: FirstStepIds;
   title: string;
   options: OptionsLabel[];
+}
+
+export enum FirstStepIds {
+  APPOINTMENT = "appointment",
+  CLASSIFICATION = "classification",
+  NOMENCLATURE = "namenclature",
+  CONTENT = "content",
 }
 interface OptionsLabel {
   label: string;
   value: string;
 }
 
-const optionsData: IOptionsData = {
-  sections: [
-    {
-      id: 1,
-      title: "Təyinat",
-      options: [
-        { label: "Ümümi", value: "Ümümi" },
-        { label: "Apellasiya şurası", value: "Apellasiya şurası" },
-        { label: "Təhlükəsizlik şurası", value: "Təhlükəsizlik şurası" },
-      ],
-    },
-    {
-      id: 2,
-      title: "Təsnifat",
-      options: [
-        { label: "Digər", value: "Digər" },
-        { label: "Göstəriş məktubu", value: "Göstəriş məktubu" },
-        { label: "Metodiki tövsiyyə", value: "Metodiki tövsiyyə" },
-      ],
-    },
-    {
-      id: 3,
-      title: "Nomenklatur",
-      options: [
-        { label: "12.1", value: "12.1" },
-        { label: "12.2", value: "12.2" },
-        { label: "12.3", value: "12.3" },
-      ],
-    },
-    {
-      id: 4,
-      title: "Mezmun",
-      options: [
-        { label: "Test-1", value: "test-1" },
-        { label: "Test-2", value: "test-2" },
-        { label: "Test-3", value: "test-3" },
-      ],
-    },
+export const appointmentData: OptionsSection = {
+  id: FirstStepIds.APPOINTMENT,
+  title: "Təyinat",
+  options: [
+    { label: "Ümümi", value: "all" },
+    { label: "Apellasiya şurası", value: "apellation" },
+    { label: "Təhlükəsizlik şurası", value: "security" },
+  ],
+};
+export const classificationData: OptionsSection = {
+  id: FirstStepIds.CLASSIFICATION,
+  title: "Təsnifat",
+  options: [
+    { label: "Digər", value: "other" },
+    { label: "Göstəriş məktubu", value: "letter" },
+    { label: "Metodiki tövsiyyə", value: "methodicalAdvice" },
+  ],
+};
+export const nomenclatureData: OptionsSection = {
+  id: FirstStepIds.NOMENCLATURE,
+  title: "Nomenklatura",
+  options: [
+    { label: "12.1", value: "other" },
+    { label: "12.2", value: "letter" },
+    { label: "12.3", value: "methodicalAdvice" },
   ],
 };
 
-export default optionsData;
+export const contentData: OptionsSection = {
+  id: FirstStepIds.CONTENT,
+  title: "Mezmun",
+  options: [
+    { label: "Test-1", value: "test1" },
+    { label: "Test-2", value: "test2" },
+    { label: "Test-3", value: "test3" },
+  ],
+};

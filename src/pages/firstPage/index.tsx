@@ -1,37 +1,77 @@
-import { Form, Select, Checkbox } from "antd";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Button } from "antd";
 import { CaretDownOutlined } from "@ant-design/icons";
-import type { CheckboxChangeEvent } from "antd/es/checkbox";
+import {
+  FirstStepIds,
+  appointmentData,
+  classificationData,
+  contentData,
+  nomenclatureData,
+} from "../../data/data";
+import ControllerA from "../../components/Controller.tsx/Controller";
 import "./style.css";
-import optionsData from "../../data/data";
-
-const handleChange = (value: string) => {
-  console.log(`selected ${value}`);
-};
-const onChange = (e: CheckboxChangeEvent) => {
-  console.log(`checked = ${e.target.checked}`);
-};
+import { yupResolver } from "@hookform/resolvers/yup";
+import { mainDataSchema } from "../../validation";
 
 const FirstPage = () => {
+  const {
+    trigger,
+    control,
+    getValues,
+    watch,
+    formState: { errors: formErrors },
+  } = useForm({
+    resolver: yupResolver(mainDataSchema),
+  });
+  const onSubmit = (data: any) => console.log(data);
+  const test = () => {
+    console.log("salam");
+    trigger();
+    console.log("errors", formErrors);
+
+    console.log("submit", getValues());
+  };
+
   return (
     <div className="firstPage-container">
       <div className="firstPage-row">
         <h2>Əsas məlumatlar</h2>
-        <Form>
-          {optionsData.sections.map((item) => (
-            <Form.Item key={item.id} label={item.title}>
-              <Select
-                id={item.title}
-                style={{ width: 300 }}
-                suffixIcon={<CaretDownOutlined />}
-                onChange={handleChange}
-                options={item.options.map((option) => ({
-                  label: option.label,
-                  value: option.value,
-                }))}
-              ></Select>
-            </Form.Item>
-          ))}
-        </Form>
+        <form>
+          <ControllerA
+            control={control}
+            item={appointmentData}
+            icon={<CaretDownOutlined />}
+          />
+          <ControllerA
+            control={control}
+            item={classificationData}
+            icon={<CaretDownOutlined />}
+          />
+          <ControllerA
+            control={control}
+            item={nomenclatureData}
+            value={nomenclatureData?.options.filter(
+              (nomenclature) =>
+                nomenclature.value === watch(FirstStepIds.CLASSIFICATION)
+            )}
+            icon={<CaretDownOutlined />}
+          />
+          <ControllerA
+            control={control}
+            item={contentData}
+            icon={<CaretDownOutlined />}
+          />
+        </form>
+      </div>
+      <div className="firstPage-row">
+        <h2>Cavablandırılan sənəd</h2>
+        <Button type="primary">İmtina et</Button>
+      </div>
+      <div className="firstPage-row">
+        <h2> Əlaqəli sənəd</h2>
+        <Button type="primary" onClick={test}>
+          İmtina et
+        </Button>
       </div>
     </div>
   );
