@@ -1,16 +1,18 @@
 import React, { useState } from "react";
+// import { UseAppDispatch } from "../../hook/hook";
 import { Drawer, Steps, Button } from "antd";
-import { ArrowRightOutlined } from "@ant-design/icons";
+// import { ArrowRightOutlined } from "@ant-design/icons";
 import FirstPage from "../../pages/firstPage";
 import SecondPage from "../../pages/secondPage";
 import ThirdPage from "../../pages/thirdPage";
 import FourthPage from "../../pages/fourthPage";
 import "./style.css";
+// import { setValue } from "../../redux/formSlice";
+// import { FirstStepIds } from "../../data/data";
 
 const SidePanel: React.FC = () => {
   const [open, setOpen] = useState(true);
-  const [current, setCurrent] = useState(0);
-  console.log("current", current);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const onClose = () => {
     setOpen(false);
@@ -33,6 +35,15 @@ const SidePanel: React.FC = () => {
     }
   };
 
+  // const handleCloseClick = () => {
+  //   setOpen(false);
+  // };
+
+  // const handleRegisterClick = () => {
+  //   dispatch(setValue({ id: FirstStepIds.APPOINTMENT, value: "yourvalue" }));
+  //   setCurrentStep(currentStep + 1);
+  // };
+
   return (
     <form>
       <div className="main-content">
@@ -44,8 +55,8 @@ const SidePanel: React.FC = () => {
           className="drawer"
         >
           <Steps
-            current={current}
-            onChange={setCurrent}
+            current={currentStep}
+            onChange={setCurrentStep}
             items={[
               {
                 title: "ƏSAS MƏLUMATLAR",
@@ -63,17 +74,8 @@ const SidePanel: React.FC = () => {
           />
           <h1>Əsas fəaliyyət üzrə Əmrlər</h1>
 
-          {showStep(current)}
-          <div className="btns">
-            <Button type="primary">İmtina et</Button>
-            <Button
-              type="primary"
-              style={{ background: "#008000", color: "#fff" }}
-              onClick={() => setCurrent(current + 1)}
-            >
-              Davam et <ArrowRightOutlined />
-            </Button>
-          </div>
+          {showStep(currentStep)}
+            {currentStep === 3 && <Button type="primary">Qeydiyyata al</Button>}
         </Drawer>
       </div>
     </form>

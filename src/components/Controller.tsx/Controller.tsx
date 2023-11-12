@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form } from "antd";
+import { Form, Input } from "antd";
 import { Checkbox, Select } from "antd";
 import { Controller } from "react-hook-form";
 import { FirstStepIds, OptionsSection } from "../../data/data";
@@ -24,6 +24,9 @@ const ControllerA = ({
 }: ControllerType) => {
   const [checked, setChecked] = useState<boolean>(false);
 
+  const handleChange = (value: { value: any; label: React.ReactNode }) => {
+    console.log(value);
+  };
   return (
     <Form.Item
       label={label}
@@ -38,13 +41,15 @@ const ControllerA = ({
           <>
             <Select
               {...field}
-              id={item.id}
+              key={item.id}
               style={{ width: 300 }}
               disabled={item.id === FirstStepIds.NOMENCLATURE}
               value={value}
+              onChange={handleChange}
               options={item.options}
               suffixIcon={icon}
             />
+            {/* <Input {...field} /> */}
             {item.id === FirstStepIds.NOMENCLATURE && (
               <Checkbox
                 {...field}

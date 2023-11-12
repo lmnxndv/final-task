@@ -1,6 +1,6 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, Form } from "antd";
-import { CaretDownOutlined } from "@ant-design/icons";
+import { useForm } from "react-hook-form";
+import { Button } from "antd";
+import { ArrowRightOutlined, CaretDownOutlined } from "@ant-design/icons";
 import {
   FirstStepIds,
   appointmentData,
@@ -14,30 +14,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { mainDataSchema } from "../../validation";
 
 const FirstPage = () => {
-  const {
-    handleSubmit,
-    trigger,
-    control,
-    getValues,
-    watch,
-    formState: { errors: formErrors },
-  } = useForm({
+  const { handleSubmit, control, watch } = useForm({
     resolver: yupResolver(mainDataSchema),
   });
 
-  const onSubmit = (data: any) => console.log(data);
-  const test = () => {
-    console.log("salam");
-    trigger();
-    console.log("errors", formErrors);
-
-    console.log("submit", getValues());
+  const onSubmit = (data: any) => {
+    console.log("Data:", data);
   };
 
   return (
     <div className="firstPage-container">
-      <Form onFinish={handleSubmit(onSubmit)}>
-        <div className="firstPage-row">
+      <form onSubmit={handleSubmit(onSubmit)} id="hook-form">
+        <div className="page-row">
           <h2>Əsas məlumatlar</h2>
           <ControllerA
             name={appointmentData.id}
@@ -72,19 +60,27 @@ const FirstPage = () => {
             icon={<CaretDownOutlined />}
           />
         </div>
-        <Form.Item>
-          <div className="firstPage-row">
-            <h2>Cavablandırılan sənəd</h2>
+        <div className="page-row">
+          <h2>Cavablandırılan sənəd</h2>
+          <Button type="primary">İmtina et</Button>
+        </div>
+        <div className="page-row">
+          <h2>Əlaqəli sənəd</h2>
+          <Button type="primary">İmtina et</Button>
+          <div className="btns">
             <Button type="primary">İmtina et</Button>
-          </div>
-          <div className="firstPage-row">
-            <h2>Əlaqəli sənəd</h2>
-            <Button type="primary" htmlType="submit">
-              İmtina et
+            <Button
+              type="primary"
+              htmlType="submit"
+              form="hook-form"
+              style={{ background: "#008000", color: "#fff" }}
+              // onClick={}
+            >
+              Davam et <ArrowRightOutlined />
             </Button>
           </div>
-        </Form.Item>
-      </Form>
+        </div>
+      </form>
     </div>
   );
 };

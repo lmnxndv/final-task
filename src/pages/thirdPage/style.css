@@ -1,0 +1,11 @@
+.file-row {
+  display: flex;
+  align-items: center;
+  border: dashed 1px #2c5374;
+  padding: 10px;
+  border-radius: 9px;
+}
+.thirdPage-container p,
+.file-row p {
+  color: #8b8b8b;
+}
