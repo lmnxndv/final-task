@@ -1,4 +1,14 @@
-:where(.css-dev-only-do-not-override-qgg3xn).ant-select-single:not(.ant-select-customize-input) .ant-select-selector{
-    border-radius: 25px;
+:where(.css-dev-only-do-not-override-qgg3xn).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
+  border-radius: 25px;
 }
 
+p {
+  color: red;
+}
+
+select:invalid {
+  border-color: red;
+}

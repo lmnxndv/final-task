@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-// import { UseAppDispatch } from "../../hook/hook";
 import { Drawer, Steps, Button } from "antd";
-// import { ArrowRightOutlined } from "@ant-design/icons";
 import FirstPage from "../../pages/firstPage";
 import SecondPage from "../../pages/secondPage";
 import ThirdPage from "../../pages/thirdPage";
 import FourthPage from "../../pages/fourthPage";
 import "./style.css";
-// import { setValue } from "../../redux/formSlice";
-// import { FirstStepIds } from "../../data/data";
+
 
 const SidePanel: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -34,15 +31,6 @@ const SidePanel: React.FC = () => {
         return null;
     }
   };
-
-  // const handleCloseClick = () => {
-  //   setOpen(false);
-  // };
-
-  // const handleRegisterClick = () => {
-  //   dispatch(setValue({ id: FirstStepIds.APPOINTMENT, value: "yourvalue" }));
-  //   setCurrentStep(currentStep + 1);
-  // };
 
   return (
     <form>
