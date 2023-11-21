@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import "./style.css";
 
-const ThirdPage = () => {
+const ElectronicForm = () => {
   const props: UploadProps = {
     name: "file",
     action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
@@ -26,9 +26,6 @@ const ThirdPage = () => {
   };
   return (
     <div className="thirdPage-container">
-      <div className="page-row">
-        <h2>Əsas məlumatlar</h2>
-      </div>
       <div className="page-row">
         <h2>Elektron forma</h2>
         <div className="file-row">
@@ -58,4 +55,4 @@ const ThirdPage = () => {
   );
 };
 
-export default ThirdPage;
+export default ElectronicForm;

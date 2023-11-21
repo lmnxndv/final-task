@@ -1,0 +1,58 @@
+:where(.css-dev-only-do-not-override-qgg3xn).ant-drawer .ant-drawer-title {
+  padding: 15px;
+  font-size: 30px;
+  background: #ebebeb;
+}
+.fa-solid {
+  margin-right: 5px;
+}
+.distributionList{
+  background-color: #fff;
+}
+.addList-row {
+  position: relative;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #eaeaea;
+  padding: 0 90px 30px 10px;
+  border-radius: 9px;
+}
+.removeFromList{
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+.addList-row p{
+  color: #c1c1c1;
+}
+.addList-row div{
+  display: flex;
+  flex-direction: column;
+}
+.addList-row div span{
+  font-size: 16px;
+  font-weight: 600;
+}
+.addList-row div button{
+  margin-top: 30px;
+}
+.drawer-users p{
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+}
+.drawer-users p:hover{
+  color: rgb(156, 156, 156);
+}
+.tableTrashBtn{
+  background-color: transparent;
+  border: none;
+  color: red;
+  font-size: 17px;
+  cursor: pointer;
+}

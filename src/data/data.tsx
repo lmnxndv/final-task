@@ -4,6 +4,12 @@ export interface OptionsSection {
   options: OptionsLabel[];
 }
 
+export interface IDistribution {
+  id: number;
+  name: string;
+  position: string;
+}
+
 export enum FirstStepIds {
   APPOINTMENT = "appointment",
   CLASSIFICATION = "classification",
@@ -14,6 +20,25 @@ interface OptionsLabel {
   label: string;
   value: string;
 }
+
+export const items = [
+  {
+    title: "ƏSAS MƏLUMATLAR",
+    type: "mainData",
+  },
+  {
+    title: "ƏMR MƏLUMATLARI",
+    type: "orderData",
+  },
+  {
+    title: "ELEKTRON FORMA",
+    type: "electronForm",
+  },
+  {
+    title: "PAYLANACAQLAR SİYAHISI",
+    type: "distributionList",
+  },
+];
 
 export const appointmentData: OptionsSection = {
   id: FirstStepIds.APPOINTMENT,
@@ -52,3 +77,36 @@ export const contentData: OptionsSection = {
     { label: "Test-3", value: "test3" },
   ],
 };
+
+export const distributionUserList = [
+  {
+    id: 1,
+    name: "Hüseynov Nihad",
+    position: "Baş İdarə Rəisi",
+  },
+  {
+    id: 2,
+    name: "Məmmədov Ramin",
+    position: "Rəis Müavini",
+  },
+  {
+    id: 3,
+    name: "Ağayev Eltac",
+    position: "Katib",
+  },
+];
+
+export const distributionList = [
+  {
+    id: 1,
+    title: "İmzalamaya vermə",
+  },
+  {
+    id: 2,
+    title: "Vizaya vermə",
+  },
+  {
+    id: 1,
+    title: "Digər strukturlarla razılaşma",
+  },
+];
