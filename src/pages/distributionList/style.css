@@ -56,3 +56,6 @@
   font-size: 17px;
   cursor: pointer;
 }
+.visa-row button:invalid{
+  border-color: red;
+}

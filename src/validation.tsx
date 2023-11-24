@@ -11,20 +11,45 @@ export const mainDataSchema = () => ({
 export const orderDataSchema = () => ({
   orderData: yup.object().shape({
     title: yup.object().shape({
-      content: yup.string().required(),
-      preambula: yup.string().required(),
+      content: yup.string().required("Xana boş qalmamalıdır!"),
+      preambula: yup.string().required("Xana boş qalmamalıdır!"),
     }),
     commandData: yup.object().shape({
-      textArea: yup.string().required(),
-      tableData: yup.array().of(
-        yup.object().shape({
-          no: yup.number().required(),
-          band: yup.string().required(),
-        })
-      ),
+      bands: yup
+        .array()
+        .of(
+          yup.object().shape({
+            body: yup.string().required(),
+          })
+        )
+        .required("Xana boş qalmamalıdır!"),
     }),
     mainTextData: yup.object().shape({
-      textArea: yup.string().required(),
+      body: yup.string().required("Xana boş qalmamalıdır!"),
     }),
+  }),
+});
+
+export const distributorSchema = () => ({
+  distributionList: yup.object().shape({
+    signer: yup.object().shape({
+      name: yup.string().required("Xana boş qalmamalıdır!"),
+    }),
+    visaEmployees: yup
+      .array()
+      .of(
+        yup.object().shape({
+          name: yup.string().required(),
+        })
+      )
+      .required("Xana boş qalmamalıdır!"),
+    anotherUnitEmployees: yup
+      .array()
+      .of(
+        yup.object().shape({
+          name: yup.string().required(),
+        })
+      )
+      .required("Xana boş qalmamalıdır!"),
   }),
 });

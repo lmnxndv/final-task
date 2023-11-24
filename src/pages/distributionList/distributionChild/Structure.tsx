@@ -1,14 +1,21 @@
-import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Button, Drawer, Space, Table } from "antd";
-import { distributionUserList } from "../../../data/data";
-import { addToListOtherOrgUnits, removeFromListOrgUnits } from "../../../redux/distributionSlice";
-import { UseAppDispatch, useAppSelector } from "../../../hook/hook";
 import { useState } from "react";
+import { Button, Drawer, Table } from "antd";
+import { distributionUserList } from "../../../data/data";
+import { useFormContext, useFieldArray } from "react-hook-form";
 import { Columns } from "./data";
 
 const Structure = () => {
-  const dispatch = UseAppDispatch();
-  const users = useAppSelector((state) => state.distribution.distributionItemsForOtherOrgUnits);
+  const methods = useFormContext();
+  const {
+    control,
+    formState: { errors: formErrors },
+  } = methods;
+
+  const structureEmployees = useFieldArray({
+    control: control,
+    name: "distributionList.structureEmployees",
+  });
+
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -20,19 +27,24 @@ const Structure = () => {
   };
 
   const handleAddToList = (userId: number) => {
-    const user = distributionUserList.find((user) => user.id === userId);
-    if (user) {
-      dispatch(addToListOtherOrgUnits(user));
-    }
+    const employee = distributionUserList.find(
+      (employee) => employee.id === userId
+    );
+    if (!employee) return;
+    structureEmployees.append(employee);
     onClose();
   };
+
   const handleRemove = (userId: number) => {
-    dispatch(removeFromListOrgUnits(userId));
+    const employeeIndex = distributionUserList.findIndex(
+      (employee) => employee.id !== userId
+    );
+    structureEmployees.remove(employeeIndex);
   };
   const columns = Columns({ handleRemove });
 
   return (
-    <div>
+    <form {...methods}>
       <div className="page-row-content">
         <div className="structure-row">
           <div>
@@ -40,21 +52,30 @@ const Structure = () => {
             <Button
               type="primary"
               onClick={showDrawer}
-              style={{ marginBottom: 10 }}
+              style={{
+                marginBottom: 10,
+              }}
             >
               <i className="fa-solid fa-user-plus"></i> Əlavə et
             </Button>
-            {users.length !== 0 && (
+            {structureEmployees.fields.length !== 0 && (
               <div className="table-row">
                 <Table
-                  dataSource={users}
+                  dataSource={structureEmployees.fields}
                   columns={columns}
                   pagination={false}
                   rowKey="id"
                 />
               </div>
             )}
-
+              {formErrors?.distributionList?.anotherUnitEmployees && (
+                <p className="err">
+                  {
+                    (formErrors?.distributionList?.anotherUnitEmployees as any)
+                      ?.message
+                  }
+                </p>
+              )}
             <Drawer
               title="Digər strukturlarla razılaşma"
               placement="right"
@@ -78,7 +99,7 @@ const Structure = () => {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { useFormContext, useFieldArray } from "react-hook-form";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Button, Drawer, Space, Table } from "antd";
 import { distributionUserList } from "../../../data/data";
-import {
-  addToListVisa,
-  removeFromListVisa,
-} from "../../../redux/distributionSlice";
-import { UseAppDispatch, useAppSelector } from "../../../hook/hook";
 
 const Visa = () => {
-  const dispatch = UseAppDispatch();
-  const users = useAppSelector(
-    (state) => state.distribution.distributionItemsForVisa
-  );
+  const methods = useFormContext();
+  const {
+    control,
+    formState: { errors: formErrors },
+  } = methods;
+
+  const visaEmployees = useFieldArray({
+    control: control,
+    name: "distributionList.visaEmployees",
+  });
+
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -23,15 +26,23 @@ const Visa = () => {
     setOpen(false);
   };
 
-  const handleAddToListVisa = (userId: number) => {
-    const user = distributionUserList.find((user) => user.id === userId);
-    if (user) {
-      dispatch(addToListVisa(user));
-    }
-    onClose();
-  };
+  const handleAddToListVisa = useCallback(
+    (userId: number) => {
+      const visaEmployee = distributionUserList.find(
+        (employee) => employee.id === userId
+      );
+      if (!visaEmployee) return;
+      visaEmployees.append(visaEmployee);
+
+      onClose();
+    },
+    [visaEmployees]
+  );
   const handleRemove = (userId: number) => {
-    dispatch(removeFromListVisa(userId));
+    const employeeIndex = distributionUserList.findIndex(
+      (user) => user.id === userId
+    );
+    visaEmployees.remove(employeeIndex);
   };
   const columns = [
     {
@@ -76,51 +87,60 @@ const Visa = () => {
   ];
   return (
     <div>
-      <div className="page-row-content">
-        <div className="visa-row">
-          <div>
-            <h2>Vizaya vermə</h2>
-            <Button
-              type="primary"
-              onClick={showDrawer}
-              style={{ marginBottom: 10 }}
-            >
-              <i className="fa-solid fa-user-plus"></i> Əlavə et
-            </Button>
-            {users.length !== 0 && (
-              <div className="table-row">
-                <Table
-                  dataSource={users}
-                  columns={columns}
-                  pagination={false}
-                  rowKey="id"
-                />
-              </div>
-            )}
-
-            <Drawer
-              title="Vizaya vermə"
-              placement="right"
-              onClose={onClose}
-              open={open}
-            >
-              <div className="users-list">
-                {distributionUserList.map((user) => (
-                  <div
-                    className="drawer-users"
-                    key={user.id}
-                    onClick={() => handleAddToListVisa(user.id)}
-                  >
-                    <p>
-                      {user.id}. {user.name}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </Drawer>
+      <form {...methods}>
+        <div className="page-row-content">
+          <div className="visa-row">
+            <div>
+              <h2>Vizaya vermə</h2>
+              <Button
+                type="primary"
+                onClick={showDrawer}
+                style={{ marginBottom: 10 }}
+              >
+                <i className="fa-solid fa-user-plus"></i> Əlavə et
+              </Button>
+              {visaEmployees.fields.length !== 0 && (
+                <div className="table-row">
+                  <Table
+                    dataSource={visaEmployees.fields}
+                    columns={columns}
+                    pagination={false}
+                    rowKey="id"
+                  />
+                </div>
+              )}
+              {formErrors?.distributionList?.visaEmployees && (
+                <p className="err">
+                  {
+                    (formErrors?.distributionList?.visaEmployees as any)
+                      ?.message
+                  }
+                </p>
+              )}
+              <Drawer
+                title="Vizaya vermə"
+                placement="right"
+                onClose={onClose}
+                open={open}
+              >
+                <div className="users-list">
+                  {distributionUserList.map((user) => (
+                    <div
+                      className="drawer-users"
+                      key={user.id}
+                      onClick={() => handleAddToListVisa(user.id)}
+                    >
+                      <p>
+                        {user.id}. {user.name}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </Drawer>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

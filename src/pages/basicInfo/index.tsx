@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 import { Button, Typography } from "antd";
-import {  CaretDownOutlined } from "@ant-design/icons";
+import { CaretDownOutlined } from "@ant-design/icons";
 import {
   FirstStepIds,
   appointmentData,
@@ -23,8 +23,6 @@ const BasicInfo = () => {
   } = methods;
 
   const mainDataName = "mainData";
-
- 
 
   const handleChangeCheckbox = useCallback(
     (checked: boolean) => {
@@ -52,7 +50,7 @@ const BasicInfo = () => {
                 error={formErrors?.mainData?.appointment}
               />
               {formErrors?.mainData?.appointment && (
-                <p>{(formErrors?.mainData?.appointment as any)?.message}</p>
+                <p className="err">{(formErrors?.mainData?.appointment as any)?.message}</p>
               )}
             </div>
           </div>
@@ -70,7 +68,7 @@ const BasicInfo = () => {
                 error={formErrors?.mainData?.classification}
               />
               {formErrors?.mainData?.classification && (
-                <p>{(formErrors?.mainData?.classification as any)?.message}</p>
+                <p className="err">{(formErrors?.mainData?.classification as any)?.message}</p>
               )}
             </div>
           </div>
@@ -113,7 +111,7 @@ const BasicInfo = () => {
                 error={formErrors.mainData?.content}
               />
               {formErrors?.mainData?.content && (
-                <p>{(formErrors?.mainData as any)?.content?.message}</p>
+                <p className="err">{(formErrors?.mainData as any)?.content?.message}</p>
               )}
             </div>
           </div>
@@ -126,7 +124,6 @@ const BasicInfo = () => {
         <div className="page-row-content">
           <h2>Əlaqəli sənəd</h2>
           <Button type="primary">İmtina et</Button>
-          
         </div>
       </form>
     </div>

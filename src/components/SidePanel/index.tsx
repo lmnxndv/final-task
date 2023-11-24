@@ -3,7 +3,11 @@ import { useForm, FormProvider } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Drawer, Steps, Button } from "antd";
-import { mainDataSchema, orderDataSchema } from "../../validation";
+import {
+  mainDataSchema,
+  orderDataSchema,
+  distributorSchema,
+} from "../../validation";
 import "./style.css";
 import { items } from "../../data/data";
 import BasicInfo from "../../pages/basicInfo";
@@ -18,6 +22,7 @@ const SidePanel: React.FC = () => {
       yup.object({
         ...mainDataSchema(),
         ...orderDataSchema(),
+        ...distributorSchema(),
       })
     ),
   });

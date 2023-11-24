@@ -4,11 +4,6 @@
   .ant-select-selector {
   border-radius: 25px;
 }
-
-.box-column p {
-  color: red;
-}
-
 select:invalid {
   border-color: red;
 }

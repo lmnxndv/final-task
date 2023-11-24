@@ -1,7 +1,7 @@
-import Sign from "./distributionChild/sign";
 import Visa from "./distributionChild/Visa";
 import Structure from "./distributionChild/Structure";
 import "./style.css";
+import Sign from "./distributionChild/Sign";
 
 const DistributionList: React.FC = () => {
   return (

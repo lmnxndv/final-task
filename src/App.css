@@ -25,3 +25,7 @@
 .typography_item {
   min-width: 100px;
 }
+
+.err {
+  color: red;
+}

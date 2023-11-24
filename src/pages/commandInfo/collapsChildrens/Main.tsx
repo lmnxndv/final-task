@@ -1,21 +1,30 @@
-import { Button } from "antd";
-import TextArea from "antd/es/input/TextArea";
+import { useFormContext } from "react-hook-form";
+import TextArea from "../../../components/TextArea";
 
 const Main = () => {
+  const methods = useFormContext();
+  const {
+    control,
+    formState: { errors: formErrors },
+  } = methods;
   return (
     <div>
-      <div className="esas-row">
-        <h4>Mətn</h4>
-        <TextArea rows={4} />
-        <div className="addTextBtn">
-          <Button
-            type="primary"
-            style={{ background: "#008000", color: "#fff", width: 100 }}
-          >
-            Əlavə et
-          </Button>
+      <form {...methods}>
+        <div className="esas-row">
+          <h4>Mətn</h4>
+          <TextArea
+            rows={4}
+            name="orderData.mainTextData.body"
+            control={control}
+            error={formErrors.orderData?.mainTextData?.body}
+          />
+          {formErrors?.orderData?.mainTextData?.body && (
+            <p className="err">
+              {formErrors?.orderData?.mainTextData?.body.message}
+            </p>
+          )}
         </div>
-      </div>
+      </form>
     </div>
   );
 };

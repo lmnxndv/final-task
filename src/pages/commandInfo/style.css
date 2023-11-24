@@ -1,19 +1,28 @@
-.addTextBtn{
-    display: flex;
-    justify-content: end;
-    margin-top: 10px;
+.addTextBtn {
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
 }
-:where(.css-dev-only-do-not-override-qgg3xn).ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child {
-width: 40px;
+:where(.css-dev-only-do-not-override-qgg3xn).ant-table-wrapper
+  .ant-table-container
+  table
+  > thead
+  > tr:first-child
+  > *:first-child {
+  width: 40px;
 }
-.ant-collapse-header-text{
-    font-size: 19px;
-    font-weight: 700;
-    color: #2c5374;
+.ant-collapse-header-text {
+  font-size: 19px;
+  font-weight: 700;
+  color: #2c5374;
 }
-.secondPage .page-row{
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 5px;
+.secondPage .page-row {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+textarea:invalid,
+input:invalid {
+  border-color: red;
 }

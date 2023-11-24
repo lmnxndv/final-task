@@ -6,14 +6,13 @@ type ControllerType = {
   control: any;
   value?: any;
   placeholder?: string;
-  onChange: (value: any) => void;
+  onChange?: (value: any) => void;
   error?: any;
 };
 
 const Input = ({
   name,
   control,
-  value,
   onChange,
   error,
   placeholder,
@@ -21,19 +20,28 @@ const Input = ({
   <Controller
     name={name}
     control={control}
-    render={({ field }) => (
-      <>
-        <InputAnt
-          {...field}
-          placeholder={placeholder}
-          style={{ width: 300 }}
-          onChange={(e) =>
-            onChange(e.target.value)}
-          value={value}
-          status={error && "error"}
-        />
-      </>
-    )}
+    render={({ field }) => {
+      const handleChange = (event: any) => {
+        if (typeof onChange === "function") {
+          const temp: any = onChange(event);
+          if (typeof temp === "string") {
+            event = temp;
+          }
+        }
+        field.onChange(event);
+      };
+      return (
+        <>
+          <InputAnt
+            {...field}
+            placeholder={placeholder}
+            style={{ width: 300 }}
+            onChange={handleChange}
+            status={error && "error"}
+          />
+        </>
+      );
+    }}
   />
 );
 
