@@ -6,7 +6,7 @@ type ControllerType = {
   control: any;
   disabled?: boolean;
   rows?: number;
-  onChange: (value?: any) => void;
+  // onChange: (value?: any) => void;
   value?: any;
   error?: any;
 };
@@ -15,7 +15,7 @@ const TextArea = ({
   name,
   disabled,
   rows,
-  onChange,
+  // onChange,
   control,
   value,
   error,
@@ -28,7 +28,7 @@ const TextArea = ({
         <Input.TextArea
           {...field}
           rows={rows}
-          onChange={(e) => onChange(e.target.value)}
+          // onChange={(e) => onChange(e.target.value)}
           style={{ width: 300 }}
           disabled={disabled}
           value={value}

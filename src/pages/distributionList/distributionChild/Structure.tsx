@@ -13,7 +13,7 @@ const Structure = () => {
 
   const structureEmployees = useFieldArray({
     control: control,
-    name: "distributionList.structureEmployees",
+    name: "distributionList.anotherUnitEmployees",
   });
 
   const [open, setOpen] = useState(false);

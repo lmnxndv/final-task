@@ -16,7 +16,7 @@ const Command: React.FC = () => {
 
   const { fields, append, remove, update } = useFieldArray({
     control,
-    name: "bands",
+    name: "orderData.commandData.bands",
   });
 
   const changeBandHandler = useCallback(() => {

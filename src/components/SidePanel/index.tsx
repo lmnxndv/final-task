@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import { isEmpty } from "lodash";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Drawer, Steps, Button } from "antd";
@@ -14,7 +15,12 @@ import BasicInfo from "../../pages/basicInfo";
 import CommandInfo from "../../pages/commandInfo";
 import DistributionList from "../../pages/distributionList";
 import ElectronicForm from "../../pages/electronicForm";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import { UseAppDispatch, useAppSelector } from "../../hook/hook";
+import MainInformation from "../MainInformation";
+import { setMainData } from "../../redux/mainInfoSlice";
+import { setTaskCard } from "../../redux/taskCardSlice";
+import Notification from "../Notification";
 
 const SidePanel: React.FC = () => {
   const methods = useForm({
@@ -28,8 +34,28 @@ const SidePanel: React.FC = () => {
   });
   const [open, setOpen] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
+  const [registerBtnClicked, setRegisterBtnClicked] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const dispatch = UseAppDispatch();
+  const select = useAppSelector((state) => state.taskCard.data);
 
-  const onClose = () => {
+  console.log("select", select);
+
+  const register = async () => {
+    await methods.trigger();
+
+    setRegisterBtnClicked(true);
+  };
+
+  useEffect(() => {
+    console.log("errors", methods.formState.errors);
+    if (!isEmpty(methods.formState.errors) || !registerBtnClicked) return;
+    const values = methods.getValues();
+    dispatch(setTaskCard(values));
+    setShowNotification(true);
+  }, [registerBtnClicked]);
+
+  const closeDrawer = () => {
     setOpen(false);
   };
 
@@ -40,7 +66,7 @@ const SidePanel: React.FC = () => {
       case 0:
         return <BasicInfo />;
       case 1:
-        return <CommandInfo setCurrentStep={setCurrentStep} />;
+        return <CommandInfo />;
       case 2:
         return <ElectronicForm />;
       case 3:
@@ -50,17 +76,17 @@ const SidePanel: React.FC = () => {
     }
   };
 
-  const nextStep = () => {
+  const nextStep = (step: number) => {
     const values = methods.getValues();
-    console.log("🚀 ~ values:", values);
-    // setValue(mainDataName, {
-    //   [FirstStepIds.APPOINTMENT]: values?.mainData?.appointment,
-    //   [FirstStepIds.CLASSIFICATION]: values?.mainData?.classification,
-    //   [FirstStepIds.CONTENT]: values?.mainData?.content
-    // });
-    setCurrentStep(currentStep + 1);
+    if (values?.mainData) dispatch(setMainData(values?.mainData));
+    setRegisterBtnClicked(false);
+    setCurrentStep(step);
   };
 
+  const backStep = () => {
+    setRegisterBtnClicked(false);
+    setCurrentStep(currentStep - 1);
+  };
   return (
     <div className="main-content">
       <FormProvider {...methods}>
@@ -71,36 +97,44 @@ const SidePanel: React.FC = () => {
           <Drawer
             placement="right"
             width={drawerWidth}
-            onClose={onClose}
+            onClose={closeDrawer}
             open={open}
             className="drawer"
           >
             <Steps
               current={currentStep}
-              onChange={setCurrentStep}
+              onChange={(step) => nextStep(step)}
               items={items}
             />
             <h1>Əsas fəaliyyət üzrə Əmrlər</h1>
-            {currentStep !== 0 && (
-              <div className="page-row">
-                <h2>Əsas məlumatlar</h2>
-              </div>
-            )}
+
+            {currentStep !== 0 && <MainInformation />}
             {showStep(currentStep)}
             <div className="btns">
-              <Button type="primary">İmtina et</Button>
-              {currentStep === 3 && (
+              {currentStep !== 0 && (
                 <Button
                   type="primary"
-                  onClick={() => console.log("values", methods.trigger())}
+                  onClick={backStep}
+                  icon={<ArrowLeftOutlined />}
                 >
-                  Qeydiyyata al
+                  Geri
                 </Button>
+              )}
+              <Button type="primary">İmtina et</Button>
+              {currentStep === 3 && (
+                <>
+                  <Button type="primary" onClick={register}>
+                    Qeydiyyata al
+                  </Button>
+                </>
+              )}
+              {showNotification && (
+                <Notification showNotification={showNotification} closeDrawer={closeDrawer}/>
               )}
               {currentStep !== 3 && (
                 <Button
                   type="primary"
-                  onClick={nextStep}
+                  onClick={() => nextStep(currentStep + 1)}
                   style={{ background: "#008000", color: "#fff" }}
                 >
                   Davam et <ArrowRightOutlined />

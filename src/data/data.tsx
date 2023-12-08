@@ -4,16 +4,10 @@ export interface OptionsSection {
   options: OptionsLabel[];
 }
 
-export interface IDistribution {
-  id: number;
-  name: string;
-  position: string;
-}
-
 export enum FirstStepIds {
   APPOINTMENT = "appointment",
   CLASSIFICATION = "classification",
-  NOMENCLATURE = "namenclature",
+  NOMENCLATURE = "nomenclature",
   CONTENT = "content",
 }
 interface OptionsLabel {
@@ -70,7 +64,7 @@ export const nomenclatureData: OptionsSection = {
 
 export const contentData: OptionsSection = {
   id: FirstStepIds.CONTENT,
-  title: "Mezmun",
+  title: "Məzmun",
   options: [
     { label: "Test-1", value: "test1" },
     { label: "Test-2", value: "test2" },

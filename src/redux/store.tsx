@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import formSlice from "./formSlice";
 import stepSlice from "./stepSlice";
-import distributionSlice from "./distributionSlice";
+import mainInfoSlice from "./mainInfoSlice";
+import taskCardSlice from "./taskCardSlice";
 
 const store = configureStore({
   reducer: {
-    form: formSlice,
     step: stepSlice,
-    distribution: distributionSlice,
+    main: mainInfoSlice,
+    taskCard: taskCardSlice,
   },
 });
 export default store;

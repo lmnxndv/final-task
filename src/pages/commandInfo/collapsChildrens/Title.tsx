@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
-import TextArea from "../../../components/TextArea";
 import Input from "../../../components/Input";
+import TextArea from "../../../components/TextArea";
 
 const Title = () => {
   const methods = useFormContext();

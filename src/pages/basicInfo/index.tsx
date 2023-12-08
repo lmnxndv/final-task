@@ -13,6 +13,7 @@ import "./style.css";
 import Dropdown from "../../components/Dropdown/index.tsx";
 import Checkbox from "../../components/Checkbox/index.tsx";
 
+
 const BasicInfo = () => {
   const methods = useFormContext();
   const {
@@ -20,16 +21,21 @@ const BasicInfo = () => {
     formState: { errors: formErrors },
     watch,
     setValue,
+    getValues,
   } = methods;
 
   const mainDataName = "mainData";
 
   const handleChangeCheckbox = useCallback(
     (checked: boolean) => {
-      setValue("nomenclatureCheck", checked);
+      console.log("checked", checked);
+
+      setValue("mainData.nomenclatureCheck", checked);
     },
     [setValue]
   );
+
+  console.log("`${mainDataName}.${contentData.id}`", getValues());
 
   return (
     <div className="firsPage-container">
@@ -50,7 +56,9 @@ const BasicInfo = () => {
                 error={formErrors?.mainData?.appointment}
               />
               {formErrors?.mainData?.appointment && (
-                <p className="err">{(formErrors?.mainData?.appointment as any)?.message}</p>
+                <p className="err">
+                  {(formErrors?.mainData?.appointment as any)?.message}
+                </p>
               )}
             </div>
           </div>
@@ -68,7 +76,9 @@ const BasicInfo = () => {
                 error={formErrors?.mainData?.classification}
               />
               {formErrors?.mainData?.classification && (
-                <p className="err">{(formErrors?.mainData?.classification as any)?.message}</p>
+                <p className="err">
+                  {(formErrors?.mainData?.classification as any)?.message}
+                </p>
               )}
             </div>
           </div>
@@ -82,17 +92,13 @@ const BasicInfo = () => {
                 disabled
                 control={control}
                 item={nomenclatureData}
-                value={nomenclatureData?.options.filter(
-                  (nomenclature) =>
-                    nomenclature.value ===
-                    watch(`${mainDataName}.${FirstStepIds.CLASSIFICATION}`)
-                )}
+                value={watch(`${mainDataName}.${classificationData.id}`)}
                 icon={<CaretDownOutlined />}
               />
               <Checkbox
                 name={`${mainDataName}.nomenclatureCheck`}
                 control={control}
-                value={watch("nomenclatureCheck")}
+                value={watch("mainData.nomenclatureCheck")}
                 onChange={handleChangeCheckbox}
               />
             </div>
@@ -111,7 +117,9 @@ const BasicInfo = () => {
                 error={formErrors.mainData?.content}
               />
               {formErrors?.mainData?.content && (
-                <p className="err">{(formErrors?.mainData as any)?.content?.message}</p>
+                <p className="err">
+                  {(formErrors?.mainData as any)?.content?.message}
+                </p>
               )}
             </div>
           </div>

@@ -22,7 +22,7 @@ export const orderDataSchema = () => ({
             body: yup.string().required(),
           })
         )
-        .required("Xana boş qalmamalıdır!"),
+        .min(1, "Xana boş qalmamalıdır!"),
     }),
     mainTextData: yup.object().shape({
       body: yup.string().required("Xana boş qalmamalıdır!"),
@@ -42,7 +42,7 @@ export const distributorSchema = () => ({
           name: yup.string().required(),
         })
       )
-      .required("Xana boş qalmamalıdır!"),
+      .min(1, "Xana boş qalmamalıdır!"),
     anotherUnitEmployees: yup
       .array()
       .of(
@@ -50,6 +50,6 @@ export const distributorSchema = () => ({
           name: yup.string().required(),
         })
       )
-      .required("Xana boş qalmamalıdır!"),
+      .min(1, "Xana boş qalmamalıdır!"),
   }),
 });

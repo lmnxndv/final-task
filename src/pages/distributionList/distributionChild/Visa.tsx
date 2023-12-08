@@ -1,8 +1,8 @@
-import { useState, useCallback } from "react";
-import { useFormContext, useFieldArray } from "react-hook-form";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Button, Drawer, Space, Table } from "antd";
+import { useState } from "react";
+import { Button, Drawer, Table } from "antd";
 import { distributionUserList } from "../../../data/data";
+import { useFormContext, useFieldArray } from "react-hook-form";
+import { Columns } from "./data";
 
 const Visa = () => {
   const methods = useFormContext();
@@ -26,122 +26,77 @@ const Visa = () => {
     setOpen(false);
   };
 
-  const handleAddToListVisa = useCallback(
-    (userId: number) => {
-      const visaEmployee = distributionUserList.find(
-        (employee) => employee.id === userId
-      );
-      if (!visaEmployee) return;
-      visaEmployees.append(visaEmployee);
+  const handleAddToList = (userId: number) => {
+    const employee = distributionUserList.find(
+      (employee) => employee.id === userId
+    );
+    if (!employee) return;
+    visaEmployees.append(employee);
+    onClose();
+  };
 
-      onClose();
-    },
-    [visaEmployees]
-  );
   const handleRemove = (userId: number) => {
     const employeeIndex = distributionUserList.findIndex(
-      (user) => user.id === userId
+      (employee) => employee.id !== userId
     );
     visaEmployees.remove(employeeIndex);
   };
-  const columns = [
-    {
-      title: "№",
-      dataIndex: "id",
-      key: "id",
-      render: (id: number) => (
-        <Space>
-          <p>{id}</p>
-        </Space>
-      ),
-    },
-    {
-      title: "SAA",
-      dataIndex: "name",
-      key: "name",
-      render: (text: string) => (
-        <Space>
-          <p>{text}</p>
-          <ExclamationCircleOutlined />
-        </Space>
-      ),
-    },
-    {
-      title: "Vəzifə",
-      dataIndex: "position",
-      key: "position",
-    },
-    {
-      key: "action",
-      render: (record: any) => (
-        <Space size="middle">
-          <button
-            className="tableTrashBtn"
-            onClick={() => handleRemove(record.id)}
-          >
-            <i className="fa-solid fa-trash"></i> Sil
-          </button>
-        </Space>
-      ),
-    },
-  ];
+  const columns = Columns({ handleRemove });
+
   return (
-    <div>
-      <form {...methods}>
-        <div className="page-row-content">
-          <div className="visa-row">
-            <div>
-              <h2>Vizaya vermə</h2>
-              <Button
-                type="primary"
-                onClick={showDrawer}
-                style={{ marginBottom: 10 }}
-              >
-                <i className="fa-solid fa-user-plus"></i> Əlavə et
-              </Button>
-              {visaEmployees.fields.length !== 0 && (
-                <div className="table-row">
-                  <Table
-                    dataSource={visaEmployees.fields}
-                    columns={columns}
-                    pagination={false}
-                    rowKey="id"
-                  />
-                </div>
-              )}
-              {formErrors?.distributionList?.visaEmployees && (
-                <p className="err">
-                  {
-                    (formErrors?.distributionList?.visaEmployees as any)
-                      ?.message
-                  }
-                </p>
-              )}
-              <Drawer
-                title="Vizaya vermə"
-                placement="right"
-                onClose={onClose}
-                open={open}
-              >
-                <div className="users-list">
-                  {distributionUserList.map((user) => (
-                    <div
-                      className="drawer-users"
-                      key={user.id}
-                      onClick={() => handleAddToListVisa(user.id)}
-                    >
-                      <p>
-                        {user.id}. {user.name}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </Drawer>
-            </div>
+    <form {...methods}>
+      <div className="page-row-content">
+        <div className="visa-row">
+          <div>
+            <h2>Vizaya vermə</h2>
+            <Button
+              type="primary"
+              onClick={showDrawer}
+              style={{
+                marginBottom: 10,
+              }}
+            >
+              <i className="fa-solid fa-user-plus"></i> Əlavə et
+            </Button>
+            {visaEmployees.fields.length !== 0 && (
+              <div className="table-row">
+                <Table
+                  dataSource={visaEmployees.fields}
+                  columns={columns}
+                  pagination={false}
+                  rowKey="id"
+                />
+              </div>
+            )}
+            {formErrors?.distributionList?.visaEmployees && (
+              <p className="err">
+                {(formErrors?.distributionList?.visaEmployees as any)?.message}
+              </p>
+            )}
+            <Drawer
+              title="Vizaya vermə"
+              placement="right"
+              onClose={onClose}
+              open={open}
+            >
+              <div className="users-list">
+                {distributionUserList.map((user) => (
+                  <div
+                    className="drawer-users"
+                    key={user.id}
+                    onClick={() => handleAddToList(user.id)}
+                  >
+                    <p>
+                      {user.id}. {user.name}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </Drawer>
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 
