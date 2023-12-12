@@ -2,6 +2,7 @@
   background-color: #fff;
   padding: 5px 15px;
   border-radius: 11px;
+  min-height: 700px;
 }
 .main-info-container div,
 .main-information div {

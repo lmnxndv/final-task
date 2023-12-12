@@ -47,3 +47,13 @@ export interface TaskCard {
   orderData: OrderData;
   distributionList: DistributionList;
 }
+interface File {
+  uid:string;
+  name: string;
+  type: string;
+  percent: number
+}
+
+export interface UploadFile{
+  file: File;
+}

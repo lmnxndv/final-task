@@ -14,31 +14,31 @@ const MainInformation: React.FC = () => {
         <div className="sections">
           <div>
             <p>Təsnifat</p>
-            <p>
+            <span>
               {
                 classificationData.options.find(
                   (app) => app.value === infoState?.classification
                 )?.label
               }
-            </p>
+            </span>
           </div>
           <div>
             <p>Nomenklatura</p>
-            <p>
+            <span>
               {
                 nomenclatureData.options.find(
                   (app) => app.value === infoState?.classification
                 )?.label
               }
-            </p>
+            </span>
           </div>
           <div>
             <p>Konfidensial</p>
-            <p>{infoState?.nomenclatureCheck ? "Beli" : "Xeyr"}</p>
+            <span>{infoState?.nomenclatureCheck ? "Bəli" : "Xeyr"}</span>
           </div>
           <div>
             <p>Məzmun</p>
-            <p>{infoState?.content}</p>
+            <span>{infoState?.content}</span>
           </div>
         </div>
         <Button type="primary">Sənədə bax</Button>

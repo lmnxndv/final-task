@@ -8,6 +8,12 @@
 .sections {
   width: 60%;
   display: grid;
+  gap: 20px;
   grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
+  margin-bottom: 8px;
+}
+.sections div span{
+  font-size: 16px;
+  font-weight: 600;
 }

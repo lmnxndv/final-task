@@ -7,7 +7,8 @@ function App() {
     <>
       <SidePanel />
       <Routes>
-        <Route path="*" element={<RegisterCard />} />
+        <Route path="/docCard/*" element={<RegisterCard />} />
+        <Route path="/docCard/*" element={<RegisterCard />} />
       </Routes>
     </>
   );

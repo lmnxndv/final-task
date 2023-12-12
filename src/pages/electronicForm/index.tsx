@@ -5,8 +5,13 @@ import {
   WarningOutlined,
 } from "@ant-design/icons";
 import "./style.css";
+import { UseAppDispatch, useAppSelector } from "../../hook/hook";
+import { setUploadFile } from "../../redux/uploadFileSlice";
 
 const ElectronicForm = () => {
+  const dispatch = UseAppDispatch();
+  const select = useAppSelector((state) => state.uploadFile.file);
+  console.log("select", select);
   const props: UploadProps = {
     name: "file",
     action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
@@ -15,7 +20,9 @@ const ElectronicForm = () => {
     },
     onChange(info) {
       if (info.file.status !== "uploading") {
+        dispatch(setUploadFile(info.file));
         console.log(info.file, info.fileList);
+        console.log("dispatch", dispatch(setUploadFile(info.file)));
       }
       if (info.file.status === "done") {
         message.success(`${info.file.name} file uploaded successfully`);

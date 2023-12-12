@@ -29,7 +29,7 @@ const Notification: React.FC<NotificatonProps> = ({
       ),
       description: (
         <div className="taskBtn">
-          <Link to="*">
+          <Link to="/docCard">
             <Button
               type="primary"
               style={{ color: "#fff" }}

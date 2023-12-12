@@ -29,6 +29,7 @@ const Sign = () => {
     if (!user) return;
     setValue("distributionList.signer", user);
     onClose();
+    
   };
   const handleRemove = () => {
     setValue("distributionList.signer", null);

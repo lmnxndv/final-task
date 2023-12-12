@@ -22,7 +22,7 @@
 .sidebarTask .title {
   margin: 10px 0;
 }
-.sidebarTask .title span {
+.sidebarTask .title p {
   background: #f5f5b8;
   color: #000;
   padding: 5px;

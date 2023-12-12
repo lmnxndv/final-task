@@ -6,40 +6,63 @@
 :where(.css-dev-only-do-not-override-qgg3xn).ant-drawer .ant-drawer-header {
   padding: 0;
 }
-:where(.css-dev-only-do-not-override-qgg3xn).ant-steps .ant-steps-item-title{
-    font-size: 10px;
-    font-weight: 600;
+:where(.css-dev-only-do-not-override-qgg3xn).ant-steps .ant-steps-item-title {
+  font-size: 10px;
+  font-weight: 600;
 }
-:where(.css-dev-only-do-not-override-qgg3xn).ant-steps .ant-steps-item-finish .ant-steps-item-icon{
-    background-color: #44633F;
-    border-color: #44633F;
+:where(.css-dev-only-do-not-override-qgg3xn).ant-steps
+  .ant-steps-item-finish
+  .ant-steps-item-icon {
+  background-color: #44633f;
+  border-color: #44633f;
 }
 
-:where(.css-dev-only-do-not-override-qgg3xn).ant-steps .ant-steps-item-finish .ant-steps-item-icon >.ant-steps-icon{
-    color: #fff;
+:where(.css-dev-only-do-not-override-qgg3xn).ant-steps
+  .ant-steps-item-finish
+  .ant-steps-item-icon
+  > .ant-steps-icon {
+  color: #fff;
 }
-:where(.css-dev-only-do-not-override-qgg3xn).ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title::after{
-    background-color: #333;
+:where(.css-dev-only-do-not-override-qgg3xn).ant-steps
+  .ant-steps-item-finish
+  > .ant-steps-item-container
+  > .ant-steps-item-content
+  > .ant-steps-item-title::after {
+  background-color: #333;
 }
- h1{
-    font-weight: 500;
+h1 {
+  font-weight: 500;
 }
-.btns{
-    position: absolute;
-    bottom: 10px;
+.btns {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 30px); 
+  background-color: #ebebeb;
+  padding: 15px; 
+  display: flex;
 }
-:where(.css-dev-only-do-not-override-qgg3xn).ant-btn-primary:not(:disabled):not(.ant-btn-disabled){
-    background-color: transparent;
-    border: 1px solid #008000;
-    color:#008000;
-    border-radius: 25px;
-    margin-right: 5px;
-    font-weight: 600;
+
+.btns > * {
+  margin-right: 5px;
 }
-:where(.css-dev-only-do-not-override-qgg3xn).ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover{
-    background-color: #008000;
+
+:where(.css-dev-only-do-not-override-qgg3xn).ant-btn-primary:not(:disabled):not(
+    .ant-btn-disabled
+  ) {
+  background-color: transparent;
+  border: 1px solid #008000;
+  color: #008000;
+  border-radius: 25px;
+  margin-right: 5px;
+  font-weight: 600;
 }
-       
-:where(.css-dev-only-do-not-override-qgg3xn).ant-drawer .ant-drawer-body{
-    background-color: #ebebeb;
+:where(.css-dev-only-do-not-override-qgg3xn).ant-btn-primary:not(:disabled):not(
+    .ant-btn-disabled
+  ):hover {
+  background-color: #008000;
+}
+
+:where(.css-dev-only-do-not-override-qgg3xn).ant-drawer .ant-drawer-body {
+  background-color: #ebebeb;
 }

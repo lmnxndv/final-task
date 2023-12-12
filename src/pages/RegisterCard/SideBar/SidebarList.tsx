@@ -12,28 +12,28 @@ const SidebarList = () => {
     <div className="sidebarList">
       <ul>
         <li>
-          <NavLink to="/mainInfo">
+          <NavLink to="/docCard/">
             <FileTextOutlined /> <p>Əsas məlumatlar</p>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/commandInfo">
+          <NavLink to="/docCard/commandInfo">
             <FileOutlined />
             <p>Əmr məlumatları</p>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/electronicForm">
+          <NavLink to="/docCard/electronicForm">
             <PaperClipOutlined /> <p>Elektron Forma</p>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/distributionList">
+          <NavLink to="/docCard/distributionList">
             <NodeIndexOutlined /> <p>Paylanacaqlar siyahısı</p>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/history">
+          <NavLink to="/docCard/history">
             <HistoryOutlined /> <p>Əməliyyat tarixçəsi</p>
           </NavLink>
         </li>

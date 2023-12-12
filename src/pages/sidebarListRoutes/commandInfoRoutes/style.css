@@ -9,6 +9,7 @@
 }
 .ant-tabs-tab-btn h3 {
   color: #fff !important;
+  font-size: 19px !important;
 }
 :where(.css-dev-only-do-not-override-qgg3xn).ant-tabs-top > .ant-tabs-nav,
 :where(.css-dev-only-do-not-override-qgg3xn).ant-tabs-bottom > .ant-tabs-nav,
@@ -40,6 +41,7 @@
 /* SecondCHild start */
 .command-info-container{
   padding: 0 10px 10px;
+  min-height: 600px;
 }
 .command-info-container div {
   margin: 20px 0;

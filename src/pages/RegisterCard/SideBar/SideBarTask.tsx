@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   AlignLeftOutlined,
   CheckCircleOutlined,
@@ -7,17 +6,16 @@ import {
 } from "@ant-design/icons";
 import { useAppSelector } from "../../../hook/hook";
 import { classificationData } from "../../../data/data";
-import SidebarList from "./SidebarList";
 
 const SideBarTask = () => {
-  const [date, setDate] = useState(new Date());
+  const date = new Date();
   const infoState = useAppSelector((state) => state.main.items);
 
   return (
     <div className="sidebarTask">
       <div className="title">
-        <p>TAPŞIRIQ</p>
-        <span>İcradadır</span>
+        TAPŞIRIQ
+        <p>İcradadır</p>
       </div>
       <div className="execution">
         <p>
@@ -26,14 +24,14 @@ const SideBarTask = () => {
       </div>
       <hr />
       <div className="title">
-        <p>SƏNƏD</p>
-        <span>İlkin məlumat</span>
+        SƏNƏD
+        <p>İlkin məlumat</p>
       </div>
       <div className="taskInfo">
         <ul>
           <li>
             <CheckCircleOutlined />
-            Qeydiyyat №: 
+            Qeydiyyat №:
           </li>
           <li>
             <FolderOutlined />
